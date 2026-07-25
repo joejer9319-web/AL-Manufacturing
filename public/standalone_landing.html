@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-EKHLAS MANUFACTURING (AEM) - B2B Frozen Food Manufacturer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@500;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#10B981',
+                            darkGreen: '#059669',
+                            dark: '#0B0F19',
+                            card: '#161F30',
+                            border: '#1E293B',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', '"Playfair Display"', 'Songti SC', 'STSong', 'serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: #F3F4F6;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1F2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10B981;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen selection:bg-brand-green selection:text-brand-dark">
+
+    <!-- STATE ENGINE -->
+    <script>
+        // Dictionary for multi-language translation
+        const DICTIONARY = {
+            zh: {
+                brandName: 'AL-EKHLAS (AEM)',
+                brandSub: '真心食品 · 冷冻食品',
+                tagline: 'JAKIM HALAL 清真认证食品工厂',
+                heroTitle: 'B2B 速冻食品研发与制造',
+                heroSub: '清真贴牌代工 (OEM / ODM) · 冷链配送',
+                heroDesc: 'AL-EKHLAS (AEM) 致力于为全马连锁餐馆、大型超市、零售商户及西马批发商提供高规格·符合 JAKIM HALAL 与认证标准的速冻食品。结合最先进的速冻工业级锁鲜工艺，助力您的连锁餐厅品牌稳定腾飞。',
+                ctaBrowse: '浏览批发产品目录',
+                ctaBuildOrder: '大宗采购 WhatsApp 订货单',
+                storyTitle: '我们的品牌传承与品质',
+                storyQuote: '真正强大的餐饮品牌，不能只依赖一个好厨师，而需要一套能够复制的标准。',
+                storyP1: '在 AL-EKHLAS MANUFACTURING SDN.BHD（AEM Frozen Food，真心食品，冷冻食品），我们深信速冻食品同样可以拥有殿堂级厨艺的精细。我们致力于将方便食品升级为专属于大马味蕾的饕餮盛宴。',
+                storyP2: '从我们精选高级食材及我们的孜然腌制的招牌沙爹冷冻烤串，到温润喉咙的传统冰糖雪梨，再到包裹着本土新鲜蔬菜、肉多汁满的丰盈饺子——我们的每一道工艺，都是大马多元文化融合的佐证。',
+                storyP3: '依托先进的工业级急速锁鲜工艺与全程恒温冷链配送网络，我们持续为大马半岛各大连锁餐饮、零售商户及批发伙伴提供稳定可靠的高品质速冻食材保障。',
+                storyP4: '在您的打造的连锁的餐饮成功路上 ，我们绝对是你最稳定的供应链！',
+                searchPlaceholder: '输入产品名称或条形码...',
+                allCategories: '全部产品',
+                addToOrder: '添加至订货单',
+                orderSheet: '大宗采购 WhatsApp 订货单',
+                orderEmpty: '您的订货单空空如也，请在上方产品目录中选择商品。',
+                sendWhatsApp: '发送 WhatsApp 订单咨询',
+                barcode: '条形码',
+                specs: '规格与批发价',
+                backToCatalog: '返回目录',
+                aboutUs: '关于 AEM',
+                contactUs: '联系我们',
+                factoryAddress: '工厂地址',
+                operationHours: '营业时间',
+                monFri: '周一至周五 9:00 AM - 6:00 PM',
+                quickLinks: '快速链接',
+                certifications: '合规认证',
+                certDesc: '100% 符合马来西亚 JAKIM Halal 清真规范，严格执行 KKM MeSTI 卫生生产流程，确保食品高无菌、全恒温。'
+            },
+            en: {
+                brandName: 'AL-EKHLAS (AEM)',
+                brandSub: 'Authentic Frozen Food',
+                tagline: 'JAKIM HALAL Certified Food Factory',
+                heroTitle: 'B2B Frozen Food R&D & Manufacturing',
+                heroSub: 'Halal OEM/ODM Services · Cold Chain Distribution',
+                heroDesc: 'AL-EKHLAS (AEM) is dedicated to supplying premium-grade frozen foods conforming strictly to JAKIM HALAL and compliance certification. Combining cutting-edge flash-freezing technology to power your F&B brand expansion.',
+                ctaBrowse: 'Browse Wholesale Catalog',
+                ctaBuildOrder: 'Build WhatsApp Order',
+                storyTitle: 'Our Heritage & Quality',
+                storyQuote: 'A truly powerful F&B brand cannot rely on a single great chef alone, but requires a standardized, replicable system.',
+                storyP1: 'At AL-EKHLAS MANUFACTURING SDN.BHD (AEM Frozen Food), we believe that quick-frozen food deserves the absolute highest level of culinary craftsmanship. We have elevated frozen food into a gourmet art form tailored specially for the Malaysian palate.',
+                storyP2: 'From our signature Satay skewered meats seasoned with aromatic spices, to traditional double-boiled dessert soups like rock sugar pear, to plump dumplings filled with local ingredients—our kitchen is a testament to Malaysia’s rich multicultural identity.',
+                storyP3: 'Powered by advanced industrial flash-freezing technology and a reliable cold-chain distribution network, we consistently provide premium, stable frozen food supply to F&B chains, retailers, and wholesale partners across Peninsular Malaysia.',
+                storyP4: 'On your journey to building a successful F&B chain, we are absolutely your most stable supply chain partner!',
+                searchPlaceholder: 'Search product name or barcode...',
+                allCategories: 'All Products',
+                addToOrder: 'Add to Order Sheet',
+                orderSheet: 'B2B WhatsApp Order Sheet',
+                orderEmpty: 'Your order sheet is currently empty. Select items from the catalog above.',
+                sendWhatsApp: 'Send WhatsApp Order Inquiry',
+                barcode: 'Barcode',
+                specs: 'Specifications & Wholesales Price',
+                backToCatalog: 'Back to Catalog',
+                aboutUs: 'About AEM',
+                contactUs: 'Contact Us',
+                factoryAddress: 'Factory Address',
+                operationHours: 'Operation Hours',
+                monFri: 'Mon - Fri: 9:00 AM - 6:00 PM',
+                quickLinks: 'Quick Links',
+                certifications: 'Certifications',
+                certDesc: '100% compliant with Malaysia JAKIM Halal guidelines and KKM MeSTI sanitary workflows, ensuring sterile, temperature-controlled safety.'
+            },
+            ms: {
+                brandName: 'AL-EKHLAS (AEM)',
+                brandSub: 'Makanan Sejuk Beku Premium',
+                tagline: 'Kilang Makanan Diperakui Halal JAKIM',
+                heroTitle: 'Penyelidikan & Pembuatan Makanan Sejuk Beku B2B',
+                heroSub: 'Khidmat Kontrak OEM/ODM Halal · Logistik Rantaian Sejuk',
+                heroDesc: 'AL-EKHLAS (AEM) komited untuk membekalkan makanan sejuk beku berkualiti tinggi yang mematuhi garis panduan Halal JAKIM dan pensijilan pematuhan ketat. Menggunakan teknologi pembekuan kilat terkini untuk pertumbuhan mantap jenama F&B anda.',
+                ctaBrowse: 'Lihat Katalog Borong',
+                ctaBuildOrder: 'Bina Pesanan WhatsApp',
+                storyTitle: 'Warisan & Kualiti Kami',
+                storyQuote: 'Jenama F&B yang benar-benar kukuh tidak boleh hanya bergantung kepada seorang tukang masak hebat, tetapi memerlukan sistem piawaian yang boleh direplikasi.',
+                storyP1: 'Di AL-EKHLAS MANUFACTURING SDN.BHD (AEM Frozen Food), kami percaya bahawa makanan sejuk beku layak menerima standard masakan yang terbaik. Kami komited untuk menaik taraf hidangan sejuk beku menjadi jamuan kulinari gourmet khas untuk cita rasa rakyat Malaysia.',
+                storyP2: 'Daripada sate daging tandatangan kami yang diperap dengan jintan manis berkualiti tinggi, sehinggalah kepada sup pir gula batu tradisional yang melegakan kerongkong, serta dumpling padat dengan sayuran segar tempatan dan inti yang berjus—setiap hidangan kami adalah bukti keharmonian budaya Malaysia.',
+                storyP3: 'Dilengkapi dengan teknologi pembekuan kilat industri dan rangkaian logistik rantaian sejuk yang cekap, kami secara konsisten membekalkan bahan mentah sejuk beku berkualiti tinggi kepada rangkaian F&B, peruncit, dan rakan borong di seluruh Semenanjung Malaysia.',
+                storyP4: 'Dalam perjalanan anda membina rangkaian F&B yang berjaya, kami pastinya rakan rantaian bekalan anda yang paling stabil!',
+                searchPlaceholder: 'Cari nama produk atau kod bar...',
+                allCategories: 'Semua Produk',
+                addToOrder: 'Tambah ke Helaian Pesanan',
+                orderSheet: 'Helaian Pesanan B2B WhatsApp',
+                orderEmpty: 'Helaian pesanan anda kosong. Pilih produk dari katalog di atas.',
+                sendWhatsApp: 'Hantar Pertanyaan Pesanan WhatsApp',
+                barcode: 'Kod Bar',
+                specs: 'Spesifikasi & Harga Borong',
+                backToCatalog: 'Kembali ke Katalog',
+                aboutUs: 'Mengenai AEM',
+                contactUs: 'Hubungi Kami',
+                factoryAddress: 'Alamat Kilang',
+                operationHours: 'Waktu Operasi',
+                monFri: 'Isnin - Jumaat: 9:00 PG - 6:00 PTG',
+                quickLinks: 'Pautan Pantas',
+                certifications: 'Pensijilan',
+                certDesc: '100% mematuhi piawaian Halal JAKIM Malaysia dan kriteria kebersihan MeSTI KKM untuk keselamatan makanan optimum.'
+            }
+        };
+
+        // Static Categories Data
+        const CATEGORIES = [
+            { id: 'all', name: 'All Products', nameZh: '全部产品', nameMs: 'Semua Produk' },
+            { id: 'satay', name: 'Satay Skewer', nameZh: '烧烤串', nameMs: 'Sate' },
+            { id: 'dessert-soup', name: 'Chinese Dessert Soup', nameZh: '传统糖水', nameMs: 'Tong Sui' },
+            { id: 'snack', name: 'Crispy Snacks', nameZh: '精致小吃', nameMs: 'Snek' },
+            { id: 'ready-to-eat', name: 'Ready To Eat Meals', nameZh: '中式料理包', nameMs: 'Hidangan Sedia Dimakan' }
+        ];
+
+        // Static Products Data
+        const PRODUCTS = [
+            {
+                id: 'sate-daging-mala',
+                name: 'Sate Daging Pedas Mala',
+                nameZh: '麻辣牛肉串',
+                category: 'satay',
+                barcode: '9552626879627',
+                image: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=600&q=80',
+                description: 'Premium beef skewers infused with authentic tongue-numbing Sichuan Mala spices. Sizzling and aromatic.',
+                descriptionZh: '精选嫩牛肉，融汇四川正宗麻辣风味，辛香酥麻，回味无穷。',
+                variants: [
+                    { size: '400g * Pkt (10 skewers)', price: 29.00 },
+                    { size: '400g * 20Pkt * Ctn', price: 580.00 }
+                ]
+            },
+            {
+                id: 'sate-kambing-mala',
+                name: 'Sate Kambing Pedas Mala',
+                nameZh: '麻辣羊肉串',
+                category: 'satay',
+                barcode: '9553636779624',
+                image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=600&q=80',
+                description: 'Tender mutton chunks marinated with bold Mala spices. Rich, spicy, and perfectly savory.',
+                descriptionZh: '严选优质羊肉，麻辣鲜香，肥而不腻，烤后香气铺鼻。',
+                variants: [
+                    { size: '400g * Pkt (10 skewers)', price: 33.00 },
+                    { size: '400g * 20Pkt * Ctn', price: 660.00 }
+                ]
+            },
+            {
+                id: 'sate-ayam-mala',
+                name: 'Sate Ayam Pedas Mala',
+                nameZh: '麻辣鸡肉串',
+                category: 'satay',
+                barcode: '9554636579627',
+                image: 'https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80',
+                description: 'Succulent chicken breast skewers marinated in spicy Sichuan pepper oil and traditional seasonings.',
+                descriptionZh: '鲜嫩鸡肉串，裹满麻辣佐料，鲜美多汁，香气饱满。',
+                variants: [
+                    { size: '400g * Pkt (10 skewers)', price: 25.00 },
+                    { size: '400g * 20Pkt * Ctn', price: 500.00 }
+                ]
+            },
+            {
+                id: 'sate-daging-classic',
+                name: 'Sate Daging (Original)',
+                nameZh: '招牌牛肉串 (经典味)',
+                category: 'satay',
+                barcode: '9554134279623',
+                image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
+                description: 'Classic Malaysian style beef satay. Richly aromatic with local spices like lemongrass, turmeric, and cumin.',
+                descriptionZh: '大马传统风味牛肉串，香茅、黄姜、孜然香气交织，经典醇厚。',
+                variants: [
+                    { size: '400g * Pkt (10 skewers)', price: 26.00 },
+                    { size: '400g * 20Pkt * Ctn', price: 520.00 }
+                ]
+            },
+            {
+                id: 'sate-kambing-classic',
+                name: 'Sate Kambing (Original)',
+                nameZh: '招牌羊肉串 (经典味)',
+                category: 'satay',
+                barcode: '9554939379627',
+                image: 'https://images.unsplash.com/photo-1514516345957-556ca7d90a29?auto=format&fit=crop&w=600&q=80',
+                description: 'Traditional marinated mutton skewers. Incredibly tender, rich, and juicy with local herbal notes.',
+                descriptionZh: '古法风味羊肉串，去腥留鲜，肉质滑嫩，汁水丰盈。',
+                variants: [
+                    { size: '400g * Pkt (10 skewers)', price: 30.00 },
+                    { size: '400g * 20Pkt * Ctn', price: 600.00 }
+                ]
+            },
+            {
+                id: 'soup-pir-gula-batu',
+                name: 'Air Pir Gula Batu',
+                nameZh: '传统冰糖雪梨',
+                category: 'dessert-soup',
+                barcode: '9553183093709',
+                image: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80',
+                description: 'Sweet, soothing pear nectar double-boiled with rock sugar to soothe the throat and cool the body.',
+                descriptionZh: '雪梨温润，加冰糖悉心慢炖，清甜滋润，清热润肺。',
+                variants: [
+                    { size: '450g * Pkt', price: 6.00 },
+                    { size: '450g * 12Pkt * Ctn', price: 78.00 }
+                ]
+            },
+            {
+                id: 'soup-kelapa-laut-longan',
+                name: 'Air Kelapa Laut & Longan Manis',
+                nameZh: '海底椰龙眼糖水',
+                category: 'dessert-soup',
+                barcode: '9553183093716',
+                image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80',
+                description: 'Classic tropical refreshment combining sweet sea coconut and dried longan. Deeply hydrating.',
+                descriptionZh: '热带经典清凉糖水，香甜海底椰肉伴随干龙眼，清甜消暑。',
+                variants: [
+                    { size: '500g * Pkt', price: 5.50 },
+                    { size: '500g * 30Pkt * Ctn', price: 165.00 }
+                ]
+            },
+            {
+                id: 'snack-kuih-pulut-gula-merah',
+                name: 'Kuih Pulut dengan Gula Merah',
+                nameZh: '外酥里嫩红糖糍粑',
+                category: 'snack',
+                barcode: '9558268783117',
+                image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=600&q=80',
+                description: 'Chewy glutinous rice cakes served with rich, fragrant liquid brown sugar syrup (gula merah).',
+                descriptionZh: '软糯香Q的糯米糍粑，淋上浓郁红糖浆，外酥里糯，甜而不腻。',
+                variants: [
+                    { size: '230g * Pkt', price: 5.30 },
+                    { size: '230g * 30Pkt * Ctn', price: 195.00 }
+                ]
+            }
+        ];
+
+        // Global Application State
+        let currentLang = 'zh';
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let orderCart = {}; // format: { 'product_id:variant_index': { product, variantIndex, qty } }
+
+        // State update wrappers
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            // Update UI elements
+            updateLocalizedUI();
+            renderCatalog();
+            renderOrderSheet();
+        }
+
+        function setCategory(catId) {
+            activeCategory = catId;
+            // Toggle active classes on buttons
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.id === catId) {
+                    btn.classList.add('bg-brand-green', 'text-brand-dark', 'font-bold');
+                    btn.classList.remove('bg-brand-card', 'text-gray-400', 'hover:bg-gray-800');
+                } else {
+                    btn.classList.remove('bg-brand-green', 'text-brand-dark', 'font-bold');
+                    btn.classList.add('bg-brand-card', 'text-gray-400', 'hover:bg-gray-800');
+                }
+            });
+            renderCatalog();
+        }
+
+        function handleSearch(e) {
+            searchQuery = e.target.value.toLowerCase().trim();
+            renderCatalog();
+        }
+    </script>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 bg-brand-dark/95 border-b border-brand-border/60 z-40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-tr from-brand-green to-emerald-400 rounded-lg flex items-center justify-center font-display font-black text-brand-dark text-lg sm:text-2xl shadow-lg shadow-brand-green/20">
+                    AEM
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-black text-white text-base sm:text-lg tracking-tight" id="ui-brandName">AL-EKHLAS (AEM)</span>
+                    <span class="text-[10px] sm:text-xs text-brand-green uppercase tracking-widest font-extrabold" id="ui-brandSub">真心食品 · 冷冻食品</span>
+                </div>
+            </a>
+
+            <!-- Menu and Lang Switcher -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <span class="hidden md:inline-flex bg-emerald-500/10 border border-emerald-500/30 text-brand-green font-display font-bold text-[10px] tracking-widest uppercase px-3 py-1.5 rounded" id="ui-tagline">
+                    JAKIM HALAL 清真认证食品工厂
+                </span>
+
+                <!-- Language Selector Pill -->
+                <div class="bg-brand-card border border-brand-border p-1 rounded-md flex items-center gap-1">
+                    <button onclick="setLanguage('en')" class="lang-btn px-2.5 py-1 text-xs font-bold rounded transition-all focus:outline-none" data-lang="en">EN</button>
+                    <button onclick="setLanguage('zh')" class="lang-btn px-2.5 py-1 text-xs font-bold rounded transition-all focus:outline-none" data-lang="zh">中</button>
+                    <button onclick="setLanguage('ms')" class="lang-btn px-2.5 py-1 text-xs font-bold rounded transition-all focus:outline-none" data-lang="ms">BM</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-gradient-to-b from-brand-dark to-[#101726] pt-12 pb-20 overflow-hidden border-b border-brand-border/40">
+        <!-- Ambient background glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-flex items-center gap-1.5 bg-brand-green/10 text-brand-green border border-brand-green/20 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 animate-pulse">
+                🌱 100% Halal Certified Manufacturer
+            </span>
+            <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-none mb-6 max-w-4xl mx-auto" id="ui-heroTitle">
+                B2B 速冻食品研发与制造
+            </h1>
+            <p class="font-display font-extrabold text-brand-green text-lg sm:text-2xl tracking-wide uppercase mb-6" id="ui-heroSub">
+                清真贴牌代工 (OEM / ODM) · 冷链配送
+            </p>
+            <p class="text-sm sm:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-10" id="ui-heroDesc">
+                AL-EKHLAS (AEM) 致力于为全马连锁餐馆、大型超市、零售商户及西马批发商提供高规格·符合 JAKIM HALAL 与认证标准的速冻食品。结合最先进的速冻工业级锁鲜工艺，助力您的连锁餐厅品牌稳定腾飞。
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <a href="#catalog" class="w-full sm:w-auto bg-brand-green hover:bg-brand-darkGreen text-brand-dark font-black tracking-wide text-sm px-8 py-4 rounded shadow-lg shadow-brand-green/10 hover:shadow-brand-green/20 transition-all uppercase flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <span id="ui-ctaBrowse">浏览批发产品目录</span>
+                </a>
+                <a href="#order-sheet" class="w-full sm:w-auto bg-transparent hover:bg-white/5 border-2 border-brand-border hover:border-gray-500 text-white font-extrabold text-sm px-8 py-4 rounded transition-all uppercase flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 text-brand-green" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <span id="ui-ctaBuildOrder">大宗采购 WhatsApp 订货单</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY HIGHLIGHTS -->
+    <section class="py-12 bg-brand-dark/30 border-b border-brand-border/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Highlight 1 -->
+                <div class="bg-brand-card border border-brand-border/60 p-6 rounded flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-green/10 rounded flex items-center justify-center shrink-0 text-brand-green">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-extrabold text-white text-base uppercase tracking-wider mb-1" id="ui-badge1">先进的-45℃ 急速冷冻锁鲜</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed" id="ui-badge1Desc">IQF 单体瞬间闪冻，完整锁住食材细胞内的水分与天然营养，解冻后饱满如初。</p>
+                    </div>
+                </div>
+                <!-- Highlight 2 -->
+                <div class="bg-brand-card border border-brand-border/60 p-6 rounded flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-green/10 rounded flex items-center justify-center shrink-0 text-brand-green">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-extrabold text-white text-base uppercase tracking-wider mb-1" id="ui-badge2">严格安全合规</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed" id="ui-badge2Desc">通过 JAKIM HALAL、KKM MeSTI 等多重认证。在全封闭无菌、恒温车间标准化制造。</p>
+                    </div>
+                </div>
+                <!-- Highlight 3 -->
+                <div class="bg-brand-card border border-brand-border/60 p-6 rounded flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-green/10 rounded flex items-center justify-center shrink-0 text-brand-green">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10M21 16V10a2 2 0 00-2-2h-3V6a1 1 0 00-1-1H12m1 11h-3M3 16h3M16 16h3"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-extrabold text-white text-base uppercase tracking-wider mb-1" id="ui-badge3">西马大宗冷链直达</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed" id="ui-badge3Desc">自有零下 -18℃ 恒温干线冷藏车车队，高密度配送全马大型餐馆和批发超市。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT CATALOG -->
+    <section id="catalog" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight uppercase" id="ui-catalogTitle">
+                批发产品目录 (B2B Products)
+            </h2>
+            <div class="w-16 h-1 bg-brand-green mx-auto mt-4 rounded"></div>
+        </div>
+
+        <!-- Search Bar and Filter Categories -->
+        <div class="flex flex-col gap-6 mb-10">
+            <!-- Search bar -->
+            <div class="relative max-w-lg mx-auto w-full">
+                <input type="text" oninput="handleSearch(e)" id="search-input" class="w-full bg-brand-card border border-brand-border rounded px-5 py-3.5 pl-12 text-sm text-gray-100 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green/20 placeholder-gray-500 font-sans" placeholder="输入产品名称或条形码...">
+                <svg class="absolute left-4 top-4 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+
+            <!-- Categories Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3" id="categories-container">
+                <!-- Javascript will inject categories here -->
+            </div>
+        </div>
+
+        <!-- Catalog Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid">
+            <!-- Javascript will inject products here -->
+        </div>
+    </section>
+
+    <!-- B2B WHATSAPP ORDER SHEET GENERATOR -->
+    <section id="order-sheet" class="py-20 bg-[#0E1524] border-t border-b border-brand-border/40">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="bg-brand-card border border-brand-border/80 rounded-lg p-6 sm:p-10 relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-green to-emerald-400"></div>
+
+                <div class="text-center mb-8">
+                    <h3 class="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight" id="ui-orderSheet">
+                        大宗采购 WhatsApp 订货单
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-2" id="ui-orderDesc">
+                        支持快捷一键向厂商询问批发配货价格，在上面目录中点击添加产品。
+                    </p>
+                </div>
+
+                <!-- Order List -->
+                <div id="order-list-container" class="space-y-4 max-h-96 overflow-y-auto mb-8 pr-1">
+                    <!-- Javascript will inject order items here -->
+                </div>
+
+                <!-- Footer details inside order sheet -->
+                <div class="border-t border-brand-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left">
+                        <span class="text-xs text-gray-400 block" id="ui-totalItems">已选择商品</span>
+                        <span class="text-xl sm:text-2xl font-black text-brand-green font-display" id="order-total-price">RM 0.00</span>
+                    </div>
+                    <button onclick="sendOrderWhatsApp()" class="w-full sm:w-auto bg-[#25D366] hover:bg-emerald-600 text-slate-950 font-black tracking-wide text-xs px-8 py-4 rounded uppercase flex items-center justify-center gap-2 transition-all shadow-md select-none">
+                        <svg class="w-5 h-5 fill-slate-950" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.459h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <span id="ui-sendWhatsApp">发送 WhatsApp 订单咨询</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND STORY & HERITAGE -->
+    <section class="py-20 bg-brand-dark max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-brand-border/40">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left text info -->
+            <div class="lg:col-span-7 text-left space-y-6">
+                <span class="text-xs font-extrabold text-brand-green uppercase tracking-widest block" id="ui-aboutUs">关于 AEM</span>
+                <h2 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight uppercase" id="ui-storyTitle">
+                    我们的品牌传承与品质
+                </h2>
+                <div class="w-12 h-1 bg-brand-green rounded"></div>
+                <div class="relative p-5 sm:p-6 bg-gradient-to-r from-emerald-950/90 via-slate-900/95 to-emerald-950/90 border-l-4 border-amber-400 rounded-r-lg shadow-xl my-2 backdrop-blur-md overflow-hidden group border-t border-r border-b border-white/5">
+                    <div class="flex items-start gap-2">
+                        <span class="text-amber-400 font-serif text-3xl sm:text-4xl leading-none select-none opacity-80 shrink-0 mt-0.5">“</span>
+                        <blockquote class="font-serif font-bold text-sm sm:text-base md:text-[17px] text-amber-50/95 leading-relaxed tracking-wide shadow-sm" id="ui-storyQuote">
+                            真正强大的餐饮品牌，不能只依赖一个好厨师，而需要一套能够复制的标准。
+                        </blockquote>
+                        <span class="text-amber-400 font-serif text-3xl sm:text-4xl leading-none select-none opacity-80 shrink-0 self-end mb-0.5">”</span>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm sm:text-base text-gray-300 leading-relaxed">
+                    <p id="ui-storyP1">在 AL-EKHLAS MANUFACTURING SDN.BHD（AEM Frozen Food，真心食品，冷冻食品），我们深信速冻食品同样可以拥有殿堂级厨艺的精细。我们致力于将方便食品升级为专属于大马味蕾的饕餮盛宴。</p>
+                    <p id="ui-storyP2">从我们精选高级食材及我们的孜然腌制的招牌沙爹冷冻烤串，到温润喉咙的传统冰糖雪梨，再到包裹着本土新鲜蔬菜、肉多汁满的丰盈饺子——我们的每一道工艺，都是大马多元文化融合的佐证。</p>
+                    <p id="ui-storyP3">我们采用闪冻技术和严密无缝的全国冷链配送网络，倾情服务大马半岛数万家庭、零售商户及餐饮机构。</p>
+                    <p class="text-[#34D399] font-sans font-black tracking-wide border-t border-white/5 pt-4" id="ui-storyP4">在您的打造的连锁的餐饮成功路上 ，我们绝对是你最稳定的供应链！</p>
+                </div>
+            </div>
+
+            <!-- Right visual stats -->
+            <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                <div class="bg-brand-card border border-brand-border p-6 rounded text-center">
+                    <span class="text-4xl font-display font-black text-brand-green block mb-1">100%</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">JAKIM Halal 认证</span>
+                </div>
+                <div class="bg-brand-card border border-brand-border p-6 rounded text-center">
+                    <span class="text-4xl font-display font-black text-brand-green block mb-1">-45℃</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">IQF 瞬间闪冻</span>
+                </div>
+                <div class="bg-brand-card border border-brand-border p-6 rounded text-center">
+                    <span class="text-4xl font-display font-black text-brand-green block mb-1">0%</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">添加人工防腐剂</span>
+                </div>
+                <div class="bg-brand-card border border-brand-border p-6 rounded text-center">
+                    <span class="text-4xl font-display font-black text-brand-green block mb-1">Semenyih</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">雪兰莪现代化中央厂房</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT DETAILS & LOCATION -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Details -->
+            <div class="text-left space-y-6">
+                <span class="text-xs font-extrabold text-brand-green uppercase tracking-widest block" id="ui-contactUs">联系我们</span>
+                <h3 class="font-display font-black text-3xl text-white uppercase tracking-tight">AL-EKHLAS MANUFACTURING</h3>
+                <div class="w-12 h-1 bg-brand-green rounded"></div>
+
+                <div class="space-y-4 text-sm text-gray-300">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-brand-green shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <div>
+                            <strong class="text-white block mb-1" id="ui-factoryAddress">工厂地址</strong>
+                            <span>No 27, Jalan P4/5, Bandar Teknologi Kajang, 43500 Semenyih, Selangor, Malaysia</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-brand-green shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <strong class="text-white block mb-1" id="ui-operationHours">营业时间</strong>
+                            <span id="ui-monFri">周一至周五 9:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-brand-green shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <div>
+                            <strong class="text-white block mb-1">WhatsApp 快速下单与代工代加工咨询</strong>
+                            <a href="https://wa.me/601116235456" class="text-brand-green hover:underline font-bold">+60 11-1623 5456</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Placeholder / Interactive Visual Card -->
+            <div class="bg-brand-card border border-brand-border rounded-lg p-6 text-center shadow-lg relative overflow-hidden">
+                <div class="h-64 rounded bg-[#101726] border border-brand-border/40 flex flex-col items-center justify-center p-4">
+                    <svg class="w-12 h-12 text-brand-green/40 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                    <span class="text-sm font-bold text-white uppercase tracking-wider">AEM Semenyih Factory Map</span>
+                    <span class="text-xs text-gray-500 mt-1 max-w-sm">No 27, Jalan P4/5, Bandar Teknologi Kajang, Semenyih</span>
+                    <a href="https://maps.google.com/?q=No+27,+Jalan+P4/5,+Bandar+Teknologi+Kajang,+Semenyih" target="_blank" class="mt-4 bg-brand-green hover:bg-emerald-600 text-brand-dark font-black tracking-wide text-[10px] uppercase px-5 py-2.5 rounded transition-all">
+                        Google Maps 导航
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark py-12 border-t border-brand-border/80 text-gray-500 text-xs text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-brand-border/30 pb-6">
+                <span class="font-display font-black text-white text-base">AL-EKHLAS MANUFACTURING</span>
+                <span class="text-brand-green font-bold text-[10px] tracking-widest uppercase">JAKIM HALAL • MeSTI • F&B Supply Chain</span>
+            </div>
+            <p>&copy; 2026 AL-EKHLAS MANUFACTURING SDN.BHD. All rights reserved. Registered in Selangor, Malaysia.</p>
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAIL SPEC MODAL -->
+    <div id="product-modal" class="fixed inset-0 bg-brand-dark/90 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-brand-card border border-brand-border max-w-2xl w-full rounded-lg overflow-hidden relative shadow-2xl">
+            <!-- Close Button -->
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-all bg-brand-dark/40 hover:bg-white/10 p-2 rounded-full focus:outline-none z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Modal Content Layout -->
+            <div class="flex flex-col md:flex-row">
+                <!-- Left aspect img -->
+                <div class="md:w-1/2 relative bg-brand-dark flex items-center justify-center p-6 border-r border-brand-border">
+                    <img id="modal-img" src="" alt="Product Image" class="max-w-full max-h-64 object-contain rounded">
+                    <span class="absolute top-4 left-4 bg-brand-green text-brand-dark font-black text-[9px] tracking-widest uppercase px-2.5 py-1 rounded" id="modal-cat">CATEGORY</span>
+                </div>
+                <!-- Right details -->
+                <div class="md:w-1/2 p-6 flex flex-col justify-between text-left">
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-display font-black text-xl text-white" id="modal-title">Product Title</h4>
+                            <span class="text-[10px] text-gray-400 font-mono" id="modal-barcode">Barcode: 955...</span>
+                        </div>
+                        <p class="text-xs text-gray-400 leading-relaxed" id="modal-desc">Product description goes here.</p>
+                        
+                        <!-- Specs -->
+                        <div class="space-y-2">
+                            <span class="text-[10px] font-black text-brand-green uppercase tracking-wider block" id="ui-specs">规格与价格</span>
+                            <div class="space-y-1" id="modal-variants-list">
+                                <!-- injected dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom CTA to append to Order list -->
+                    <div class="mt-6 pt-4 border-t border-brand-border flex items-center gap-2">
+                        <button id="modal-add-btn" class="flex-1 bg-brand-green hover:bg-emerald-600 text-brand-dark font-black tracking-wide text-xs py-3.5 rounded uppercase transition-all shadow-md">
+                            添加至订货单
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN STATE LOGIC SCRIPTS -->
+    <script>
+        // Update elements text values based on current active language
+        function updateLocalizedUI() {
+            // Update lang selector active states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.dataset.lang === currentLang) {
+                    btn.classList.add('bg-brand-green', 'text-brand-dark');
+                    btn.classList.remove('text-gray-400');
+                } else {
+                    btn.classList.remove('bg-brand-green', 'text-brand-dark');
+                    btn.classList.add('text-gray-400');
+                }
+            });
+
+            // Update simple ID bindings
+            const localized = DICTIONARY[currentLang];
+            const idsToUpdate = [
+                'brandName', 'brandSub', 'tagline', 'heroTitle', 'heroSub', 'heroDesc',
+                'ctaBrowse', 'ctaBuildOrder', 'storyTitle', 'storyQuote', 'storyP1', 'storyP2', 'storyP3', 'storyP4',
+                'orderSheet', 'aboutUs', 'contactUs', 'factoryAddress', 'operationHours', 'monFri',
+                'specs'
+            ];
+
+            idsToUpdate.forEach(id => {
+                const el = document.getElementById(`ui-${id}`);
+                if (el && localized[id]) {
+                    el.textContent = localized[id];
+                }
+            });
+
+            // Update placeholder search
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.placeholder = localized.searchPlaceholder;
+            }
+
+            // Render categories tabs dynamically to match translation
+            const catContainer = document.getElementById('categories-container');
+            if (catContainer) {
+                catContainer.innerHTML = CATEGORIES.map(cat => {
+                    let catName = cat.name;
+                    if (currentLang === 'zh') catName = cat.nameZh;
+                    if (currentLang === 'ms') catName = cat.nameMs;
+
+                    const isActive = activeCategory === cat.id;
+                    const activeClasses = isActive ? 'bg-brand-green text-brand-dark font-bold' : 'bg-brand-card text-gray-400 hover:bg-gray-800';
+
+                    return `
+                        <button onclick="setCategory('${cat.id}')" data-id="${cat.id}" class="cat-btn px-4 py-2 text-xs rounded transition-all focus:outline-none ${activeClasses}">
+                            ${catName}
+                        </button>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Render Product Catalog list
+        function renderCatalog() {
+            const grid = document.getElementById('products-grid');
+            if (!grid) return;
+
+            // Filter products
+            const filteredProducts = PRODUCTS.filter(p => {
+                const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
+                
+                const nameMatch = p.name.toLowerCase().includes(searchQuery) || 
+                                  p.nameZh.toLowerCase().includes(searchQuery);
+                const barcodeMatch = p.barcode.includes(searchQuery);
+                
+                return matchesCategory && (nameMatch || barcodeMatch);
+            });
+
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-gray-500">
+                        No products found matching "${searchQuery}".
+                    </div>
+                `;
+                return;
+            }
+
+            const localized = DICTIONARY[currentLang];
+
+            grid.innerHTML = filteredProducts.map(p => {
+                const title = currentLang === 'zh' ? p.nameZh : p.name;
+                const desc = currentLang === 'zh' ? p.descriptionZh : p.description;
+                
+                // Variant info
+                const bestVariant = p.variants[0];
+                const priceFormatted = `RM ${bestVariant.price.toFixed(2)}`;
+
+                return `
+                    <div class="bg-brand-card border border-brand-border hover:border-brand-green/30 rounded overflow-hidden flex flex-col justify-between transition-all group duration-300">
+                        <div class="relative cursor-pointer" onclick="openProductModal('${p.id}')">
+                            <!-- Image container -->
+                            <div class="h-44 bg-brand-dark flex items-center justify-center p-3 relative overflow-hidden">
+                                <img src="${p.image}" alt="${title}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <!-- Info content -->
+                            <div class="p-4 space-y-2 text-left">
+                                <span class="text-[9px] font-black text-brand-green uppercase tracking-widest block">${p.category}</span>
+                                <h4 class="font-display font-bold text-sm text-white group-hover:text-brand-green transition-all line-clamp-1">${title}</h4>
+                                <p class="text-[11px] text-gray-400 line-clamp-2 h-8 leading-tight">${desc}</p>
+                            </div>
+                        </div>
+
+                        <!-- Variant and Quick Order CTA -->
+                        <div class="p-4 pt-0 text-left border-t border-brand-border/40 mt-3">
+                            <div class="flex items-center justify-between gap-2 py-3">
+                                <span class="text-[10px] text-gray-500 truncate max-w-[120px]">${bestVariant.size}</span>
+                                <span class="text-xs font-black text-brand-green">${priceFormatted}</span>
+                            </div>
+                            <button onclick="addToOrderSheet('${p.id}', 0)" class="w-full bg-brand-green/10 hover:bg-brand-green border border-brand-green/20 hover:border-transparent text-brand-green hover:text-brand-dark font-extrabold text-[10px] uppercase py-2 rounded transition-all select-none">
+                                ${localized.addToOrder}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Open Product Modal Specs View
+        function openProductModal(productId) {
+            const p = PRODUCTS.find(prod => prod.id === productId);
+            if (!p) return;
+
+            const modal = document.getElementById('product-modal');
+            const img = document.getElementById('modal-img');
+            const title = document.getElementById('modal-title');
+            const barcode = document.getElementById('modal-barcode');
+            const desc = document.getElementById('modal-desc');
+            const cat = document.getElementById('modal-cat');
+            const variantsContainer = document.getElementById('modal-variants-list');
+            const addBtn = document.getElementById('modal-add-btn');
+
+            const localizedTitle = currentLang === 'zh' ? p.nameZh : p.name;
+            const localizedDesc = currentLang === 'zh' ? p.descriptionZh : p.description;
+
+            img.src = p.image;
+            title.textContent = localizedTitle;
+            barcode.textContent = `${DICTIONARY[currentLang].barcode}: ${p.barcode}`;
+            desc.textContent = localizedDesc;
+            cat.textContent = p.category;
+
+            // Render variants
+            variantsContainer.innerHTML = p.variants.map((v, idx) => `
+                <div class="flex items-center justify-between p-2.5 bg-brand-dark/40 rounded border border-brand-border/60 text-xs">
+                    <span class="text-gray-300">${v.size}</span>
+                    <div class="flex items-center gap-3">
+                        <span class="font-bold text-brand-green">RM ${v.price.toFixed(2)}</span>
+                        <button onclick="addToOrderSheet('${p.id}', ${idx})" class="bg-brand-green hover:bg-emerald-600 text-brand-dark px-2 py-1 rounded text-[9px] font-black uppercase">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add action to button
+            addBtn.onclick = () => {
+                addToOrderSheet(p.id, 0);
+                closeProductModal();
+            };
+            addBtn.textContent = DICTIONARY[currentLang].addToOrder;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Order cart / sheet mechanisms
+        function addToOrderSheet(productId, variantIndex) {
+            const p = PRODUCTS.find(prod => prod.id === productId);
+            if (!p) return;
+
+            const key = `${productId}:${variantIndex}`;
+            if (orderCart[key]) {
+                orderCart[key].qty += 1;
+            } else {
+                orderCart[key] = {
+                    product: p,
+                    variantIndex: variantIndex,
+                    qty: 1
+                };
+            }
+
+            renderOrderSheet();
+            
+            // Subtle visual toast
+            const btn = event?.currentTarget;
+            if (btn) {
+                const originalText = btn.innerHTML;
+                btn.classList.add('bg-brand-green', 'text-brand-dark');
+                btn.innerHTML = '✓ Added';
+                setTimeout(() => {
+                    btn.classList.remove('bg-brand-green', 'text-brand-dark');
+                    btn.innerHTML = originalText;
+                }, 1000);
+            }
+        }
+
+        function changeOrderQty(key, delta) {
+            if (!orderCart[key]) return;
+            orderCart[key].qty += delta;
+            if (orderCart[key].qty <= 0) {
+                delete orderCart[key];
+            }
+            renderOrderSheet();
+        }
+
+        function renderOrderSheet() {
+            const container = document.getElementById('order-list-container');
+            const totalEl = document.getElementById('order-total-price');
+            if (!container || !totalEl) return;
+
+            const keys = Object.keys(orderCart);
+            if (keys.length === 0) {
+                container.innerHTML = `
+                    <div class="py-8 text-center text-gray-500 text-xs">
+                        ${DICTIONARY[currentLang].orderEmpty}
+                    </div>
+                `;
+                totalEl.textContent = 'RM 0.00';
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = keys.map(key => {
+                const item = orderCart[key];
+                const p = item.product;
+                const v = p.variants[item.variantIndex];
+                const title = currentLang === 'zh' ? p.nameZh : p.name;
+                const subtotal = v.price * item.qty;
+                total += subtotal;
+
+                return `
+                    <div class="flex items-center justify-between p-3.5 bg-[#101726]/80 rounded border border-brand-border text-xs gap-4">
+                        <div class="flex flex-col text-left">
+                            <span class="font-extrabold text-white line-clamp-1">${title}</span>
+                            <span class="text-[10px] text-gray-500 mt-0.5">${v.size}</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <!-- Qty selector -->
+                            <div class="flex items-center gap-1.5 bg-brand-dark px-2 py-1 rounded border border-brand-border">
+                                <button onclick="changeOrderQty('${key}', -1)" class="text-gray-400 hover:text-white px-1 font-bold">-</button>
+                                <span class="w-6 text-center font-bold text-white">${item.qty}</span>
+                                <button onclick="changeOrderQty('${key}', 1)" class="text-gray-400 hover:text-white px-1 font-bold">+</button>
+                            </div>
+                            <!-- Subtotal price -->
+                            <span class="font-bold text-brand-green w-20 text-right">RM ${subtotal.toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalEl.textContent = `RM ${total.toFixed(2)}`;
+        }
+
+        // WhatsApp action handler
+        function sendOrderWhatsApp() {
+            const keys = Object.keys(orderCart);
+            if (keys.length === 0) {
+                alert(DICTIONARY[currentLang].orderEmpty);
+                return;
+            }
+
+            let message = `Hello AEM, I am interested in wholesale B2B ordering the following:\n\n`;
+            let total = 0;
+
+            keys.forEach(key => {
+                const item = orderCart[key];
+                const p = item.product;
+                const v = p.variants[item.variantIndex];
+                const subtotal = v.price * item.qty;
+                total += subtotal;
+                message += `- ${p.name} (${v.size}) x ${item.qty} = RM ${subtotal.toFixed(2)}\n`;
+            });
+
+            message += `\nEstimated Price: RM ${total.toFixed(2)}\n`;
+            message += `Please quote the best wholesale custom package price for my restaurant/outlet. Thanks!`;
+
+            const waUrl = `https://wa.me/601116235456?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // Initialize state on load
+        setLanguage('zh');
+    </script>
+</body>
+</html>
